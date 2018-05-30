@@ -10,6 +10,7 @@
 #import "UIView+Frame.h"
 #import "SDWebImageManager.h"
 #import "UIImageView+WebCache.h"
+#import <UIImage+GIF.h>
 @interface LLCollectionViewCell ()
 @property (nonatomic, strong)UIImageView * imageView;
 @property (nonatomic, strong)UILabel * titleLabel;
