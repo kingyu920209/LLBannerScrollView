@@ -10,11 +10,12 @@
 #import "LLCollectionViewCell.h"
 #import "UIView+Frame.h"
 #import "SDWebImageManager.h"
-
+#import "CubLayout.h"
 static NSString * const LLCollectionViewCellID = @"LLCollectionViewCell";
 
-@interface LLBannerScrollView ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface LLBannerScrollView ()<UICollectionViewDelegate,UICollectionViewDataSource,CAAnimationDelegate>
 @property (nonatomic, weak) UICollectionViewFlowLayout *flowLayout;
+//@property (nonatomic, weak)CubLayout * flowLayout;
 @property (nonatomic, weak) UICollectionView *mainScollcetionView; // 显示图片的collectionView
 @property (nonatomic, assign) NSInteger totalItemsCount;/** 数据源总个数*/
 @property (nonatomic, strong) NSMutableArray *imagePathsGroup;/** 网络图片 url string 数组 */
@@ -40,7 +41,7 @@ static NSString * const LLCollectionViewCellID = @"LLCollectionViewCell";
         _currentPageColor = [UIColor whiteColor];
         _otherPageColor = [UIColor lightGrayColor];
         _bannerImageViewContentMode = UIViewContentModeScaleToFill;
-
+        self.scrollViewAnimation = LLBannerScrollViewAnimationDefault;
         [self setupMainView];
         [self setupTimer];
         [self setUpPath];
@@ -74,6 +75,12 @@ static NSString * const LLCollectionViewCellID = @"LLCollectionViewCell";
 
 - (void)setupMainView
 {
+    
+//  CubLayout * flowLayout = [[CubLayout alloc]init];
+//    flowLayout.isZoom = YES;
+//    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    flowLayout.minimumLineSpacing = 0;
+    
     UICollectionViewFlowLayout * layout = [UICollectionViewFlowLayout new];
     layout.minimumLineSpacing = 0;
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -160,8 +167,21 @@ static NSString * const LLCollectionViewCellID = @"LLCollectionViewCell";
         }
         return;
     }
-    
+    if (self.scrollViewAnimation == LLBannerScrollViewAnimationCube) {
+        CATransition *animation = [CATransition animation];
+        animation.delegate = self;
+        animation.duration = 0.5f ;
+//        animation.timingFunction = UIViewAnimationCurveEaseInOut;
+        animation.fillMode = kCAFillModeForwards;
+        animation.subtype = kCATransitionFromRight;
+
+        animation.removedOnCompletion = YES;
+        animation.type = @"cube";
+        [self.mainScollcetionView.layer addAnimation:animation forKey:@"animationID"];
+
+    }
     [_mainScollcetionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:targetIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+
 }
 
 - (void)disableScrollGesture {
@@ -175,7 +195,11 @@ static NSString * const LLCollectionViewCellID = @"LLCollectionViewCell";
 
 - (void)clearImagesCache
 {
+    NSString * path = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"LLBannerCache"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:path error:nil];
     [[[SDWebImageManager sharedManager] imageCache] clearDiskOnCompletion:nil];
+    [self setUpPath];
 }
 
 #pragma mark ----------setter方法赋值------------
@@ -374,7 +398,12 @@ float durationWithSourceAtIndex(CGImageSourceRef source, NSUInteger index) {
     [self setupPageControl];
 
 }
+-(void)setOtherPageColor:(UIColor *)otherPageColor
+{
+    UIPageControl *pageControl = (UIPageControl *)_pageControl;
+    pageControl.pageIndicatorTintColor = otherPageColor;
 
+}
 -(void)setCurrentPageColor:(UIColor *)currentPageColor
 {
     UIPageControl *pageControl = (UIPageControl *)_pageControl;
@@ -428,7 +457,11 @@ float durationWithSourceAtIndex(CGImageSourceRef source, NSUInteger index) {
 {
     return (int)index % self.imagePathsGroup.count;
 }
-
+-(void)setItemWidth:(CGFloat)itemWidth
+{
+    _itemWidth = itemWidth;
+    self.flowLayout.itemSize = CGSizeMake(itemWidth, self.bounds.size.height);
+}
 #pragma mark - UICollectionViewDataSource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
@@ -480,6 +513,7 @@ float durationWithSourceAtIndex(CGImageSourceRef source, NSUInteger index) {
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+
     if (self.autoScroll) {
         [self invalidateTimer];
     }
@@ -501,6 +535,7 @@ float durationWithSourceAtIndex(CGImageSourceRef source, NSUInteger index) {
     [super layoutSubviews];
     
     self.flowLayout.itemSize = self.frame.size;
+//    self.flowLayout.itemSize = CGSizeMake(self.bounds.size.width-100, self.bounds.size.height);
 
     self.mainScollcetionView.frame = self.bounds;
     

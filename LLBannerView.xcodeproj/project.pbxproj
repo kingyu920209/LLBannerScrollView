@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C48F5CE20C3EA320022C2AE /* CubLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C48F5CD20C3EA320022C2AE /* CubLayout.m */; };
 		0CDD385720BC84F800D7F5EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD385620BC84F800D7F5EF /* AppDelegate.m */; };
 		0CDD385A20BC84F800D7F5EF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDD385920BC84F800D7F5EF /* ViewController.m */; };
 		0CDD385D20BC84F800D7F5EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CDD385B20BC84F800D7F5EF /* Main.storyboard */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C48F5CC20C3EA320022C2AE /* CubLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CubLayout.h; sourceTree = "<group>"; };
+		0C48F5CD20C3EA320022C2AE /* CubLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubLayout.m; sourceTree = "<group>"; };
 		0CDD385220BC84F800D7F5EF /* LLBannerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLBannerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDD385520BC84F800D7F5EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0CDD385620BC84F800D7F5EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				0CDD388C20BC895B00D7F5EF /* LLCollectionViewCell.m */,
 				0CDD388E20BC907300D7F5EF /* LLBannerScrollView.h */,
 				0CDD388F20BC907300D7F5EF /* LLBannerScrollView.m */,
+				0C48F5CC20C3EA320022C2AE /* CubLayout.h */,
+				0C48F5CD20C3EA320022C2AE /* CubLayout.m */,
 			);
 			path = LLBannerScrollView;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				0CDD385A20BC84F800D7F5EF /* ViewController.m in Sources */,
 				0CDD386520BC84F900D7F5EF /* main.m in Sources */,
 				0CDD385720BC84F800D7F5EF /* AppDelegate.m in Sources */,
+				0C48F5CE20C3EA320022C2AE /* CubLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

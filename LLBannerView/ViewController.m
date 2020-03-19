@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "LLBannerScrollView.h"
+
 @interface ViewController ()<LLBannerScrollViewDelegate>
 
 @end
@@ -17,13 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSArray *imagesURLStrings = @[
-                                  @"http://photo.l99.com/source/11/1330351552722_cxn26e.gif",
-                                  @"http://5b0988e595225.cdn.sohucs.com/images/20171001/24c768544bf74fc7880624412929de3a.jpeg",
+                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544447047321&di=6ad7d36a74800ec9be576e7fb0cc7c20&imgtype=0&src=http%3A%2F%2Fimgsa.baidu.com%2Fexp%2Fw%3D500%2Fsign%3Db63716a2f21f3a295ac8d5cea924bce3%2Fc8177f3e6709c93d4aacb98b9d3df8dcd100546b.jpg",
+                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544447047321&di=327c4981aacf52708d7c8375cda75ee4&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fa783a4a7e97dfb09567ff069cdedce49192c02dc23b2-HgslCY_fw658",
                                   @"http://b.hiphotos.baidu.com/zhidao/pic/item/d01373f082025aafbd279e23f9edab64024f1ac4.jpg",
-                                  @"http://photo.l99.com/bigger/10/1375583044819_555bsn.png",
+                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544447047321&di=6ad7d36a74800ec9be576e7fb0cc7c20&imgtype=0&src=http%3A%2F%2Fimgsa.baidu.com%2Fexp%2Fw%3D500%2Fsign%3Db63716a2f21f3a295ac8d5cea924bce3%2Fc8177f3e6709c93d4aacb98b9d3df8dcd100546b.jpg",
 
                                   @"http://photo.l99.com/source/11/1330351552722_cxn26e.gif",
-                                  @"http://s22.mogucdn.com/p1/151212/2173om_ie4wiyzrmmydczbwguzdambqgqyde_748x997.jpg_750x999.jpg",
+                                  @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544447047321&di=6ad7d36a74800ec9be576e7fb0cc7c20&imgtype=0&src=http%3A%2F%2Fimgsa.baidu.com%2Fexp%2Fw%3D500%2Fsign%3Db63716a2f21f3a295ac8d5cea924bce3%2Fc8177f3e6709c93d4aacb98b9d3df8dcd100546b.jpg",
                                   @"2.gif"
                            
                                   ];
@@ -40,7 +41,9 @@
 
     LLBannerScrollView * bannerScrollView = [LLBannerScrollView bannerScrollViewWithFrame:CGRectMake(0, 280, w, 280) delegate:self placeholderImage:nil];
     [self.view addSubview:bannerScrollView];
-    
+
+    bannerScrollView.autoScroll = NO;
+    bannerScrollView.scrollViewAnimation = LLBannerScrollViewAnimationCube;
     bannerScrollView.imageURLStringsGroup = imagesURLStrings;
     bannerScrollView.titlesGroup = titles;
     bannerScrollView.titleLabelTextColor = [UIColor yellowColor];

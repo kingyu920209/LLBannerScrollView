@@ -54,7 +54,6 @@
 }
 -(void)setImagePath:(NSString *)imagePath{
     _imagePath = [imagePath copy];
-    NSLog(@"%@",imagePath);
     if ([imagePath isKindOfClass:[NSString class]]) {
         if ([imagePath hasPrefix:@"http"]) {
             if ([imagePath hasSuffix:@".gif"]) {

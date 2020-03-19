@@ -12,6 +12,11 @@ typedef enum {
     LLBannerScrollViewPageContolAlimentCenter
 } LLBannerScrollViewPageContolAliment;
 
+typedef enum {
+    LLBannerScrollViewAnimationDefault,
+    LLBannerScrollViewAnimationCube,
+} LLBannerScrollViewAnimation;
+
 @class LLBannerScrollView;
 @protocol LLBannerScrollViewDelegate <NSObject>
 
@@ -22,9 +27,12 @@ typedef enum {
 
 @interface LLBannerScrollView : UIView
 
-+ (instancetype)bannerScrollViewWithFrame:(CGRect)frame delegate:(id<LLBannerScrollViewDelegate>)delegate placeholderImage:(UIImage *)placeholderImage;
++ (instancetype)bannerScrollViewWithFrame:(CGRect)frame
+                                 delegate:(id<LLBannerScrollViewDelegate>)delegate
+                         placeholderImage:(UIImage *)placeholderImage;
 
-+ (instancetype)bannerScrollViewWithFrame:(CGRect)frame  placeholderImage:(UIImage *)placeholderImage;
++ (instancetype)bannerScrollViewWithFrame:(CGRect)frame
+                         placeholderImage:(UIImage *)placeholderImage;
 
 + (instancetype)bannerScrollViewWithFrame:(CGRect)frame;
 
@@ -74,6 +82,9 @@ typedef enum {
 /** 分页控件位置 */
 @property (nonatomic, assign) LLBannerScrollViewPageContolAliment pageControlAliment;
 
+/** 滚动动画 */
+@property (nonatomic, assign) LLBannerScrollViewAnimation  scrollViewAnimation;
+
 /** 分页控件距离轮播图的底部间距（在默认间距基础上）的偏移量 */
 @property (nonatomic, assign) CGFloat pageControlBottomOffset;
 
@@ -109,6 +120,9 @@ typedef enum {
 
 /** 轮播文字label对齐方式 */
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
+
+//cell宽度
+@property (nonatomic,assign) CGFloat itemWidth;
 
 /** 滚动手势禁用（文字轮播较实用） */
 - (void)disableScrollGesture;
